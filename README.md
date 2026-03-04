@@ -36,7 +36,7 @@ AI Town takes your exported Claude conversations and turns them into a retro pix
 
 ## Tech Stack
 
-- **Next.js 15** (App Router)
+- **Next.js 16** (App Router)
 - **TypeScript**
 - **HTML Canvas** for the town renderer
 - **Cloudflare R2** for town data storage
@@ -65,18 +65,28 @@ R2_BUCKET_NAME=your_bucket_name
 
 ```
 app/
-  page.tsx          — Landing page
-  upload/page.tsx   — Upload & claim flow
-  [username]/       — Public town view
-  api/towns/        — Town CRUD endpoints
+  page.tsx              — Landing page
+  upload/page.tsx       — Upload & claim flow
+  [username]/page.tsx   — Public town view
+  api/towns/            — Town CRUD endpoints
 components/
-  TownCanvas.tsx    — Canvas renderer component
-  BuildingInfoPanel — Building detail overlay
+  TownCanvas.tsx        — Canvas renderer component
+  BuildingInfoPanel.tsx — Building detail overlay
+  UploadZone.tsx        — Drag-and-drop ZIP upload
+  UsernameInput.tsx     — Username claim input
+  TownStats.tsx         — Town statistics display
+  ShareBar.tsx          — Social sharing bar
+  ProviderStrip.tsx     — Provider branding strip
+  SponsorsSection.tsx   — Sponsors display
+  ui/                   — Shared UI primitives (shadcn)
 lib/
-  canvasRenderer.ts — Core pixel-art rendering engine
-  townLayout.ts     — Grid layout algorithm
-  parseClaudeExport — ZIP parser for Claude exports
-  r2.ts             — Cloudflare R2 client
+  canvasRenderer.ts     — Core pixel-art rendering engine
+  townLayout.ts         — Grid layout algorithm
+  parseClaudeExport.ts  — ZIP parser for Claude exports
+  peepAI.ts             — Wandering peep AI logic
+  sampleData.ts         — Sample town data for demos
+  r2.ts                 — Cloudflare R2 client
+  utils.ts              — Shared utilities
 ```
 
 ## License
