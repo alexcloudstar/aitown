@@ -1,26 +1,127 @@
 @import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@custom-variant dark (&:is(.dark *));
+
+@font-face {
+  font-family: 'Press Start 2P';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('https://fonts.gstatic.com/s/pressstart2p/v15/e3t4euO8T-267oIAQAu6jDQyK3nVivM.woff2') format('woff2');
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --font-sans: var(--font-dm-sans);
   --font-mono: var(--font-geist-mono);
+  --font-display: 'Press Start 2P', monospace;
+  --color-surface: #16162a;
+  --color-sky-dark: #0d0d1a;
+  --color-amber: #ffd700;
+  --color-amber-dark: #b8960a;
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+:root {
+  --radius: 0px;
+  --background: #0d0d1a;
+  --foreground: #e8e8f0;
+  --card: #16162a;
+  --card-foreground: #e8e8f0;
+  --popover: #16162a;
+  --popover-foreground: #e8e8f0;
+  --primary: #ffd700;
+  --primary-foreground: #0d0d1a;
+  --secondary: #2a2a3a;
+  --secondary-foreground: #e8e8f0;
+  --muted: #2a2a3a;
+  --muted-foreground: #888899;
+  --accent: #ffd700;
+  --accent-foreground: #0d0d1a;
+  --destructive: #ff4444;
+  --border: #2a2a3a;
+  --input: #2a2a3a;
+  --ring: #ffd700;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-sans), system-ui, sans-serif;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Pixel button */
+.pixel-btn {
+  background: var(--color-amber);
+  color: var(--color-sky-dark);
+  font-family: var(--font-display);
+  font-size: 12px;
+  padding: 12px 24px;
+  box-shadow: 4px 4px 0px var(--color-amber-dark);
+  border-radius: 0;
+  transition: transform 0.1s, box-shadow 0.1s;
+  cursor: pointer;
+  border: none;
+  text-decoration: none;
+  display: inline-block;
+  line-height: 1.5;
+}
+.pixel-btn:hover {
+  filter: brightness(1.1);
+}
+.pixel-btn:active {
+  transform: translate(4px, 4px);
+  box-shadow: none;
+}
+
+/* Scanline CRT effect */
+.scanlines::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg, transparent, transparent 2px,
+    rgba(0,0,0,0.03) 2px, rgba(0,0,0,0.03) 4px
+  );
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* Pixel card hover glow */
+.pixel-card {
+  border: 2px solid var(--border);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.pixel-card:hover {
+  border-color: var(--color-amber);
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.15);
 }
