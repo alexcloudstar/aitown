@@ -1,5 +1,9 @@
 # AI Town Roadmap
 
+> Your 3am coding rants? That's the sketchy part of town now.
+
+---
+
 ## Phase 1: Atmosphere & Polish
 
 ### Day/Night Cycle
@@ -66,10 +70,19 @@
 
 ## Phase 3: Town Structure & Meaning
 
+> This is where it gets personal. Your town starts reflecting *how* you think.
+
 ### Districts & Neighborhoods
 - Group buildings by topic using conversation title clustering (coding, writing, research, etc.)
 - Different ground textures or color tints per district
 - District name labels on the map
+- Your 3am debugging sessions? Welcome to the industrial zone
+
+### Vibe Zones
+- Late-night conversations (midnight–4am) cluster into a neon-lit "night district" with flickering signs
+- Long rambling chats → winding alleyway district with narrow buildings
+- Short, snappy Q&A convos → a clean downtown grid
+- Conversations where you went back and forth a lot → a busy market square
 
 ### Parks & Green Spaces
 - Long idle conversations become parks/gardens instead of buildings
@@ -80,6 +93,7 @@
 - Longest conversation → special landmark (castle, lighthouse, monument)
 - First conversation → town hall at the center
 - Most active month → a plaza or market square
+- Your most unhinged 3am rant → a crooked tower on the edge of town
 
 ### Connected Roads
 - Buildings with related topics linked by highlighted paths
@@ -118,7 +132,7 @@
 ### Town Comparisons
 - Side-by-side view of two users' towns
 - Compare: size, activity level, building types, total messages
-- Fun visual diff
+- "My town vs yours" flex
 
 ### Guestbook
 - Visitors can leave a pixel sticky note on a bulletin board in the town
@@ -135,6 +149,8 @@
   - "Night Owl" — lots of late-night chats → owl perched on a building
   - "Prolific" — 10k+ messages → golden mailbox
   - "Veteran" — 1+ year of conversations → clock tower
+  - "Insomniac" — majority of conversations after midnight → neon motel sign
+  - "Debater" — lots of back-and-forth → courthouse with columns
 
 ### Building Upgrades
 - Revisiting a conversation (more messages over time) visually upgrades the building
@@ -152,3 +168,28 @@
   - Conversation about music → musical notes floating out
   - Conversation about food → smoke from a chimney shaped like a fork
   - Very long conversation → a flag on the rooftop
+  - Conversation at 3am → flickering "OPEN 24HR" neon sign
+  - Conversation about existential crisis → tiny philosopher peep sitting on the roof
+
+---
+
+## Phase 6: The Meta Layer
+
+> Your town isn't just a visualization — it's a mirror.
+
+### Conversation Mood Mapping
+- Analyze conversation tone (frustrated, curious, creative, panicked)
+- Reflect mood in building style: warm colors for creative, harsh angles for debugging frustration
+- "Panic builds" from deadline-week conversations get construction scaffolding
+
+### The Skyline View
+- Zoomed-out silhouette view of your entire town against the sky
+- Shows the shape of your AI usage over time
+- Printable as a minimal poster
+
+### Town Bio
+- Auto-generated one-liner description of your town based on stats
+- Examples:
+  - "A bustling metropolis of 847 conversations. Heavy on code, light on sleep."
+  - "A quiet village. 12 buildings. Mostly existential questions after midnight."
+  - "An industrial hub. 90% debugging. The towers never sleep."

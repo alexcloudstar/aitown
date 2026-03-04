@@ -1,36 +1,84 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+<p align="center">
+  <img src="public/preview.svg" alt="AI Town — your Claude conversations as a living pixel city" width="700" />
+</p>
+
+<h1 align="center">AI Town</h1>
+
+<p align="center">
+  <strong>Your Claude conversations, visualized as a living pixel city.</strong><br/>
+  Export your Claude chat history, upload it, and watch your conversations turn into buildings — the more you talked, the taller they grow.
+</p>
+
+<p align="center">
+  <a href="https://aitown.so">aitown.so</a>
+</p>
+
+---
+
+## What is this?
+
+AI Town takes your exported Claude conversations and turns them into a retro pixel-art city. Each conversation becomes a building — tiny houses for quick chats, towers for your longest deep dives. Peeps wander the streets. Windows flicker at night. It's your AI history, alive.
+
+**How it works:**
+1. Export your Claude data as a ZIP
+2. Upload it on [aitown.so](https://aitown.so)
+3. Claim a username, and your town goes live
+
+## Features
+
+- Pixel-art city renderer on HTML canvas with smooth camera controls
+- Buildings sized by conversation length (small / medium / large / tower)
+- Each building gets a unique color from the conversation UUID
+- Flickering windows, wandering peeps, street lamps with glow
+- Cinematic auto-pan mode
+- Click any building to see conversation stats
+- Shareable town URLs (`aitown.so/yourname`)
+
+## Tech Stack
+
+- **Next.js 15** (App Router)
+- **TypeScript**
+- **HTML Canvas** for the town renderer
+- **Cloudflare R2** for town data storage
+- **Tailwind CSS** + retro pixel aesthetic
+- **JSZip** for parsing Claude export ZIPs client-side
 
 ## Getting Started
 
-First, run the development server:
-
 ```bash
-npm run dev
-# or
-yarn dev
-# or
+pnpm install
 pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+You'll need a `.env` file with your R2 credentials:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
+R2_ENDPOINT=your_r2_endpoint
+R2_ACCESS_KEY_ID=your_access_key
+R2_SECRET_ACCESS_KEY=your_secret_key
+R2_BUCKET_NAME=your_bucket_name
+```
 
-## Learn More
+## Project Structure
 
-To learn more about Next.js, take a look at the following resources:
+```
+app/
+  page.tsx          — Landing page
+  upload/page.tsx   — Upload & claim flow
+  [username]/       — Public town view
+  api/towns/        — Town CRUD endpoints
+components/
+  TownCanvas.tsx    — Canvas renderer component
+  BuildingInfoPanel — Building detail overlay
+lib/
+  canvasRenderer.ts — Core pixel-art rendering engine
+  townLayout.ts     — Grid layout algorithm
+  parseClaudeExport — ZIP parser for Claude exports
+  r2.ts             — Cloudflare R2 client
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## License
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+MIT
