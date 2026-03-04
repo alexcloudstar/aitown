@@ -80,7 +80,7 @@
 }
 
 /* ============================================
-   HERO ENTRANCE — staggered cascade
+   HERO ENTRANCE -staggered cascade
    ============================================ */
 @keyframes hero-rise {
   0% { opacity: 0; transform: translateY(30px); filter: blur(4px); }
@@ -104,7 +104,7 @@
 .hero-entrance-5 { animation-delay: 1.7s; }
 
 /* ============================================
-   GLITCH TEXT — eyebrow flicker
+   GLITCH TEXT -eyebrow flicker
    ============================================ */
 @keyframes glitch {
   0%, 90%, 100% { transform: none; opacity: 1; }
@@ -149,7 +149,7 @@
 }
 
 /* ============================================
-   PIXEL BUTTON — enhanced with glow pulse
+   PIXEL BUTTON -enhanced with glow pulse
    ============================================ */
 @keyframes btn-glow-pulse {
   0%, 100% { box-shadow: 4px 4px 0px var(--color-amber-dark), 0 0 20px rgba(255,215,0,0.15), 0 0 60px rgba(255,215,0,0.05); }
@@ -184,7 +184,7 @@
 }
 
 /* ============================================
-   SCANLINES + VIGNETTE + GRAIN — layered atmosphere
+   SCANLINES + VIGNETTE + GRAIN -layered atmosphere
    ============================================ */
 .scanlines::after {
   content: '';
@@ -240,7 +240,7 @@
 }
 
 /* ============================================
-   FLOATING PARTICLES — ambient pixel dust
+   FLOATING PARTICLES -ambient pixel dust
    ============================================ */
 @keyframes particle-float {
   0% { transform: translateY(0) translateX(0); opacity: 0; }
@@ -262,7 +262,7 @@
 }
 
 /* ============================================
-   SCROLL REVEAL — elements rising into view
+   SCROLL REVEAL -elements rising into view
    ============================================ */
 .scroll-reveal {
   opacity: 0;
@@ -280,7 +280,7 @@
 .scroll-reveal-delay-4 { transition-delay: 0.4s; }
 
 /* ============================================
-   SCROLL INDICATOR — bouncing chevron
+   SCROLL INDICATOR -bouncing chevron
    ============================================ */
 @keyframes scroll-bounce {
   0%, 100% { transform: translateY(0); opacity: 0.6; }
@@ -294,7 +294,7 @@
 }
 
 /* ============================================
-   PIXEL CARD — enhanced hover
+   PIXEL CARD -enhanced hover
    ============================================ */
 .pixel-card {
   border: 2px solid var(--border);
@@ -341,7 +341,7 @@
 }
 
 /* ============================================
-   HEADLINE GLOW — persistent shimmer
+   HEADLINE GLOW -persistent shimmer
    ============================================ */
 @keyframes headline-shimmer {
   0%, 100% { text-shadow: 0 0 30px rgba(255,215,0,0.2), 0 0 60px rgba(255,215,0,0.05); }
@@ -377,7 +377,7 @@
 }
 
 /* ============================================
-   AMBIENT COLOR WASH — top of below-fold
+   AMBIENT COLOR WASH -top of below-fold
    ============================================ */
 .ambient-wash {
   background: linear-gradient(180deg,

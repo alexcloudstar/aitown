@@ -96,7 +96,7 @@ export default function UploadPage() {
       });
 
       if (res.status === 409) {
-        setError("Username was just taken — go back and choose another.");
+        setError("Username was just taken - go back and choose another.");
         setStep(1);
         return;
       }

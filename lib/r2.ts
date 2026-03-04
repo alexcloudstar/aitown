@@ -3,6 +3,7 @@ import {
   GetObjectCommand,
   PutObjectCommand,
   HeadObjectCommand,
+  ListObjectsV2Command,
 } from "@aws-sdk/client-s3";
 import type { TownData } from "@/types";
 
@@ -39,6 +40,41 @@ export async function getTown(username: string): Promise<TownData | null> {
   } catch {
     return null;
   }
+}
+
+export interface TownSummary {
+  username: string;
+  totalConversations: number;
+  totalMessages: number;
+  createdAt: string;
+}
+
+export async function listTowns(): Promise<TownSummary[]> {
+  const res = await r2.send(
+    new ListObjectsV2Command({ Bucket: BUCKET, Prefix: "towns/" })
+  );
+
+  if (!res.Contents?.length) return [];
+
+  const towns: TownSummary[] = [];
+  for (const obj of res.Contents) {
+    const match = obj.Key?.match(/^towns\/([^/]+)\/town\.json$/);
+    if (!match) continue;
+    const username = match[1];
+    const town = await getTown(username);
+    if (town) {
+      towns.push({
+        username: town.username,
+        totalConversations: town.totalConversations,
+        totalMessages: town.totalMessages,
+        createdAt: town.createdAt,
+      });
+    }
+  }
+
+  // Sort by newest first
+  towns.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+  return towns;
 }
 
 export async function saveTown(

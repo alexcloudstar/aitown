@@ -3,6 +3,7 @@
 import { useEffect, useState, useRef, useCallback } from "react";
 import Link from "next/link";
 import type { BuildingData } from "@/types";
+import type { TownSummary } from "@/lib/r2";
 import { SAMPLE_BUILDINGS } from "@/lib/sampleData";
 import { TownCanvas } from "@/components/TownCanvas";
 import { ProviderStrip } from "@/components/ProviderStrip";
@@ -121,6 +122,7 @@ function ScrollReveal({
 /* ─── main page ─── */
 export default function LandingPage() {
   const [buildings, setBuildings] = useState<BuildingData[]>(SAMPLE_BUILDINGS);
+  const [towns, setTowns] = useState<TownSummary[]>([]);
 
   useEffect(() => {
     fetch("/api/towns/alexcloudstar")
@@ -129,13 +131,20 @@ export default function LandingPage() {
         if (data?.buildings?.length) setBuildings(data.buildings);
       })
       .catch(() => {});
+
+    fetch("/api/towns")
+      .then((r) => (r.ok ? r.json() : []))
+      .then((data) => {
+        if (Array.isArray(data)) setTowns(data);
+      })
+      .catch(() => {});
   }, []);
 
   return (
     <main className="min-h-screen bg-[color:var(--color-sky-dark)] overflow-x-hidden">
 
       {/* ══════════════════════════════════════
-          HERO — full viewport, layered atmosphere
+          HERO -full viewport, layered atmosphere
           ══════════════════════════════════════ */}
       <section className="relative h-screen w-full overflow-hidden scanlines vignette noise-grain">
 
@@ -144,7 +153,7 @@ export default function LandingPage() {
           <TownCanvas buildings={buildings} mode="cinematic" />
         </div>
 
-        {/* Layer 1: Dark gradient overlay — heavier at top/bottom, lighter at center */}
+        {/* Layer 1: Dark gradient overlay -heavier at top/bottom, lighter at center */}
         <div
           className="absolute inset-0 z-[1]"
           style={{
@@ -177,10 +186,10 @@ export default function LandingPage() {
           ))}
         </div>
 
-        {/* Layer 3: Hero content — staggered entrance */}
+        {/* Layer 3: Hero content -staggered entrance */}
         <div className="relative z-[4] flex flex-col items-center justify-center h-full px-6 text-center">
 
-          {/* Eyebrow — glitch effect */}
+          {/* Eyebrow -glitch effect */}
           <p
             className="hero-entrance hero-entrance-1 glitch-text text-[color:var(--color-amber)] mb-8 tracking-[0.3em] uppercase"
             style={{ fontFamily: "var(--font-display)", fontSize: "10px" }}
@@ -189,7 +198,7 @@ export default function LandingPage() {
             AI TOWN BETA
           </p>
 
-          {/* Headline — glow shimmer */}
+          {/* Headline -glow shimmer */}
           <h1
             className="hero-entrance hero-entrance-2 headline-glow text-[color:var(--color-amber)] mb-8 max-w-4xl"
             style={{
@@ -233,12 +242,12 @@ export default function LandingPage() {
       </section>
 
       {/* ══════════════════════════════════════
-          PROVIDERS — scroll-triggered
+          PROVIDERS -scroll-triggered
           ══════════════════════════════════════ */}
       <ProviderStrip />
 
       {/* ══════════════════════════════════════
-          HOW IT WORKS — pixel art steps
+          HOW IT WORKS -pixel art steps
           ══════════════════════════════════════ */}
       <section className="py-24 grid-bg ambient-wash">
         <div className="max-w-5xl mx-auto px-6">
@@ -292,7 +301,7 @@ export default function LandingPage() {
             ))}
           </div>
 
-          {/* Connecting line between steps — desktop only */}
+          {/* Connecting line between steps -desktop only */}
           <div className="hidden md:flex items-center justify-center mt-10 gap-2">
             {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11].map((i) => (
               <div
@@ -306,7 +315,66 @@ export default function LandingPage() {
       </section>
 
       {/* ══════════════════════════════════════
-          PRIVACY CALLOUT — builds trust
+          EXPLORE TOWNS -browse existing towns
+          ══════════════════════════════════════ */}
+      {towns.length > 0 && (
+        <section className="py-24 grid-bg">
+          <div className="max-w-5xl mx-auto px-6">
+            <ScrollReveal>
+              <p
+                className="text-[10px] text-[color:var(--color-amber)] mb-4 tracking-[0.3em]"
+                style={{ fontFamily: "var(--font-display)" }}
+              >
+                EXPLORE TOWNS
+              </p>
+              <p className="text-muted-foreground mb-14 max-w-md">
+                Check out towns built by the community. Click any town to explore it.
+              </p>
+            </ScrollReveal>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              {towns.map((town, i) => (
+                <ScrollReveal key={town.username} delay={Math.min(i + 1, 3)}>
+                  <Link href={`/${town.username}`} className="block group">
+                    <Card className="pixel-card bg-[color:var(--color-surface)] h-full relative overflow-hidden transition-all duration-200 group-hover:border-[color:var(--color-amber)]/50">
+                      <CardContent className="py-6 px-5">
+                        <div className="flex items-center gap-3 mb-3">
+                          {/* Tiny building icon */}
+                          <div className="flex items-end gap-[2px] shrink-0">
+                            <div className="w-1.5 h-3 bg-[color:var(--color-amber)]/40" />
+                            <div className="w-1.5 h-5 bg-[color:var(--color-amber)]/60" />
+                            <div className="w-1.5 h-4 bg-[color:var(--color-amber)]/40" />
+                          </div>
+                          <h3
+                            className="text-foreground group-hover:text-[color:var(--color-amber)] transition-colors truncate"
+                            style={{
+                              fontFamily: "var(--font-display)",
+                              fontSize: "11px",
+                            }}
+                          >
+                            {town.username}
+                          </h3>
+                        </div>
+                        <div className="flex items-center gap-4 text-xs text-muted-foreground">
+                          <span>{town.totalConversations} conversations</span>
+                          <span className="text-muted-foreground/30">|</span>
+                          <span>{town.totalMessages.toLocaleString()} msgs</span>
+                        </div>
+                        <p className="text-[10px] text-muted-foreground/40 mt-2">
+                          aitown.so/{town.username}
+                        </p>
+                      </CardContent>
+                    </Card>
+                  </Link>
+                </ScrollReveal>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* ══════════════════════════════════════
+          PRIVACY CALLOUT -builds trust
           ══════════════════════════════════════ */}
       <section className="py-20 border-y border-[color:var(--border)]">
         <div className="max-w-3xl mx-auto px-6 text-center">
@@ -326,7 +394,7 @@ export default function LandingPage() {
             </h2>
             <p className="text-muted-foreground leading-relaxed max-w-lg mx-auto">
               Your conversation content <span className="text-foreground font-medium">never leaves your browser</span>.
-              We only store message counts and dates — no titles, no text, no identifiers.
+              We only store message counts and dates - no titles, no text, no identifiers.
               Even if our storage is breached, there&apos;s nothing personal in it.
             </p>
           </ScrollReveal>
@@ -339,12 +407,12 @@ export default function LandingPage() {
       <SponsorsSection />
 
       {/* ══════════════════════════════════════
-          FOOTER — enhanced
+          FOOTER -enhanced
           ══════════════════════════════════════ */}
       <footer className="border-t border-[color:var(--border)] py-12 grid-bg">
         <div className="max-w-5xl mx-auto px-6">
           <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
-            {/* Left — brand */}
+            {/* Left -brand */}
             <div className="flex flex-col gap-2">
               <span
                 className="text-[color:var(--color-amber)]"
@@ -357,7 +425,7 @@ export default function LandingPage() {
               </span>
             </div>
 
-            {/* Center — links */}
+            {/* Center -links */}
             <div className="flex items-center gap-6">
               <a
                 href="https://github.com/alexcloudstar/aitown"
@@ -385,7 +453,7 @@ export default function LandingPage() {
               </a>
             </div>
 
-            {/* Right — pixel art decoration */}
+            {/* Right -pixel art decoration */}
             <div className="flex items-end gap-1">
               {/* Tiny buildings silhouette */}
               <div className="w-2 h-3 bg-muted-foreground/20" />

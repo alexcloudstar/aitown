@@ -11,7 +11,7 @@ export async function generateMetadata({
 
   if (!town) {
     return {
-      title: `${username} — AI Town`,
+      title: `${username} - AI Town`,
       description: `Visit ${username}'s AI Town.`,
     };
   }
@@ -19,16 +19,16 @@ export async function generateMetadata({
   const description = `${username}'s AI Town: ${town.totalConversations} conversations, ${town.totalMessages.toLocaleString()} messages`;
 
   return {
-    title: `${username} — AI Town`,
+    title: `${username} - AI Town`,
     description,
     openGraph: {
-      title: `${username} — AI Town`,
+      title: `${username} - AI Town`,
       description,
       type: "website",
     },
     twitter: {
       card: "summary_large_image",
-      title: `${username} — AI Town`,
+      title: `${username} - AI Town`,
       description,
     },
   };

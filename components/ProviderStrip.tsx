@@ -67,8 +67,8 @@ export function ProviderStrip() {
               <CardContent className="flex flex-col items-center gap-3 py-6 relative">
                 {/* Live dot for supported */}
                 {p.supported && (
-                  <div className="absolute top-3 right-3 live-pulse">
-                    <div className="w-2 h-2 rounded-full bg-emerald-400" />
+                  <div className="absolute top-3 right-3 flex items-center justify-center">
+                    <div className="w-2 h-2 rounded-full bg-emerald-400 relative live-pulse" />
                   </div>
                 )}
 

@@ -10,19 +10,19 @@ const dmSans = DM_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "AI Town — Your AI conversations, brought to life",
+  title: "AI Town - Your AI conversations, brought to life",
   description:
     "Upload your Claude history and watch it become a living pixel art town. Every conversation a building. Every message a person.",
   metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL ?? "https://aitown.so"),
   openGraph: {
-    title: "AI Town — Your AI conversations, brought to life",
+    title: "AI Town - Your AI conversations, brought to life",
     description:
       "Upload your Claude history and watch it become a living pixel art town.",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "AI Town — Your AI conversations, brought to life",
+    title: "AI Town - Your AI conversations, brought to life",
     description:
       "Upload your Claude history and watch it become a living pixel art town.",
   },

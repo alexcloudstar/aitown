@@ -85,7 +85,7 @@ export default async function OGImage({
 
   const dateRange =
     earliestMonth && latestMonth
-      ? `${formatMonth(earliestMonth)} — ${formatMonth(latestMonth)}`
+      ? `${formatMonth(earliestMonth)} - ${formatMonth(latestMonth)}`
       : "";
 
   // Building type counts
