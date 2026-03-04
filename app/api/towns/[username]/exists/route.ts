@@ -13,6 +13,10 @@ export async function GET(
     return NextResponse.json({ exists: false });
   }
 
-  const exists = await townExists(username);
-  return NextResponse.json({ exists });
+  try {
+    const exists = await townExists(username);
+    return NextResponse.json({ exists });
+  } catch {
+    return NextResponse.json({ error: "Storage unavailable" }, { status: 503 });
+  }
 }

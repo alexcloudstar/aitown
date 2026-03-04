@@ -15,16 +15,20 @@ export async function GET(
     return NextResponse.json({ error: "Invalid username" }, { status: 400 });
   }
 
-  const town = await getTown(username);
-  if (!town) {
-    return NextResponse.json({ error: "Town not found" }, { status: 404 });
-  }
+  try {
+    const town = await getTown(username);
+    if (!town) {
+      return NextResponse.json({ error: "Town not found" }, { status: 404 });
+    }
 
-  return NextResponse.json(town, {
-    headers: {
-      "Cache-Control": "public, s-maxage=60, stale-while-revalidate=300",
-    },
-  });
+    return NextResponse.json(town, {
+      headers: {
+        "Cache-Control": "public, s-maxage=60, stale-while-revalidate=300",
+      },
+    });
+  } catch {
+    return NextResponse.json({ error: "Storage unavailable" }, { status: 503 });
+  }
 }
 
 export async function POST(
@@ -38,7 +42,12 @@ export async function POST(
   }
 
   // Check not taken
-  const exists = await townExists(username);
+  let exists: boolean;
+  try {
+    exists = await townExists(username);
+  } catch {
+    return NextResponse.json({ error: "Storage unavailable" }, { status: 503 });
+  }
   if (exists) {
     return NextResponse.json(
       { error: "Username already taken" },
@@ -151,7 +160,11 @@ export async function POST(
     buildings: body.buildings,
   };
 
-  await saveTown(username, townData);
+  try {
+    await saveTown(username, townData);
+  } catch {
+    return NextResponse.json({ error: "Storage unavailable" }, { status: 503 });
+  }
 
   return NextResponse.json({ success: true }, { status: 201 });
 }
