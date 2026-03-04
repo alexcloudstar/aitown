@@ -1,12 +1,12 @@
 <p align="center">
-  <img src="public/preview.svg" alt="AI Town — your Claude conversations as a living pixel city" width="700" />
+  <img src="public/preview.svg" alt="AI Town - your Claude conversations as a living pixel city" width="700" />
 </p>
 
 <h1 align="center">AI Town</h1>
 
 <p align="center">
   <strong>Your Claude conversations, visualized as a living pixel city.</strong><br/>
-  Export your Claude chat history, upload it, and watch your conversations turn into buildings — the more you talked, the taller they grow.
+  Export your Claude chat history, upload it, and watch your conversations turn into buildings - the more you talked, the taller they grow.
 </p>
 
 <p align="center">
@@ -17,7 +17,7 @@
 
 ## What is this?
 
-AI Town takes your exported Claude conversations and turns them into a retro pixel-art city. Each conversation becomes a building — tiny houses for quick chats, towers for your longest deep dives. Peeps wander the streets. Windows flicker at night. It's your AI history, alive.
+AI Town takes your exported Claude conversations and turns them into a retro pixel-art city. Each conversation becomes a building - tiny houses for quick chats, towers for your longest deep dives. Peeps wander the streets. Windows flicker at night. It's your AI history, alive.
 
 **How it works:**
 1. Export your Claude data as a ZIP
@@ -46,8 +46,8 @@ AI Town takes your exported Claude conversations and turns them into a retro pix
 ## Getting Started
 
 ```bash
-pnpm install
-pnpm dev
+npm install
+npm dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000).
@@ -65,29 +65,91 @@ R2_BUCKET_NAME=your_bucket_name
 
 ```
 app/
-  page.tsx              — Landing page
-  upload/page.tsx       — Upload & claim flow
-  [username]/page.tsx   — Public town view
-  api/towns/            — Town CRUD endpoints
+  page.tsx               Landing page
+  upload/page.tsx        Upload & claim flow
+  [username]/page.tsx    Public town view
+  api/towns/             Town CRUD endpoints
 components/
-  TownCanvas.tsx        — Canvas renderer component
-  BuildingInfoPanel.tsx — Building detail overlay
-  UploadZone.tsx        — Drag-and-drop ZIP upload
-  UsernameInput.tsx     — Username claim input
-  TownStats.tsx         — Town statistics display
-  ShareBar.tsx          — Social sharing bar
-  ProviderStrip.tsx     — Provider branding strip
-  SponsorsSection.tsx   — Sponsors display
-  ui/                   — Shared UI primitives (shadcn)
+  TownCanvas.tsx         Canvas renderer component
+  BuildingInfoPanel.tsx  Building detail overlay
+  UploadZone.tsx         Drag-and-drop ZIP upload
+  UsernameInput.tsx      Username claim input
+  TownStats.tsx          Town statistics display
+  ShareBar.tsx           Social sharing bar
+  ProviderStrip.tsx      Provider branding strip
+  SponsorsSection.tsx    Sponsors display
+  ui/                    Shared UI primitives (shadcn)
 lib/
-  canvasRenderer.ts     — Core pixel-art rendering engine
-  townLayout.ts         — Grid layout algorithm
-  parseClaudeExport.ts  — ZIP parser for Claude exports
-  peepAI.ts             — Wandering peep AI logic
-  sampleData.ts         — Sample town data for demos
-  r2.ts                 — Cloudflare R2 client
-  utils.ts              — Shared utilities
+  canvasRenderer.ts      Core pixel-art rendering engine
+  townLayout.ts          Grid layout algorithm
+  parseClaudeExport.ts   ZIP parser for Claude exports
+  peepAI.ts              Wandering peep AI logic
+  sampleData.ts          Sample town data for demos
+  r2.ts                  Cloudflare R2 client
+  utils.ts               Shared utilities
 ```
+
+## Data Storage (Cloudflare R2)
+
+Town data is stored in Cloudflare R2 under a single bucket. Each town is a JSON file at:
+
+```
+towns/{username}/town.json
+```
+
+### What's stored
+
+A `town.json` file contains only aggregate, non-identifiable data:
+
+```json
+{
+  "username": "alexcloudstar",
+  "createdAt": "2025-01-15T12:00:00.000Z",
+  "totalConversations": 42,
+  "totalMessages": 1830,
+  "buildings": [
+    {
+      "index": 1,
+      "messageCount": 87,
+      "humanMessageCount": 40,
+      "assistantMessageCount": 47,
+      "firstActive": "2024-03",
+      "lastActive": "2024-11",
+      "buildingType": "medium",
+      "positionX": 5,
+      "positionY": 3,
+      "colorSeed": 220
+    }
+  ]
+}
+```
+
+### What's NOT stored
+
+- No conversation titles
+- No conversation text or content
+- No UUIDs or identifiers linking back to Claude
+- No user accounts or auth tokens
+
+Conversation titles are stored in the browser's `localStorage` under `aitown_owner_{username}` and are only visible to the town owner.
+
+### API endpoints
+
+| Method | Route | Description |
+|--------|-------|-------------|
+| `GET` | `/api/towns` | List all towns (summary only) |
+| `GET` | `/api/towns/{username}` | Fetch a single town |
+| `POST` | `/api/towns/{username}` | Create a new town |
+| `GET` | `/api/towns/{username}/exists` | Check username availability |
+
+### R2 client (`lib/r2.ts`)
+
+The R2 client uses the AWS S3 SDK and exposes:
+
+- `getTown(username)` - fetch a town's JSON
+- `saveTown(username, data)` - write a town's JSON
+- `townExists(username)` - check if a town exists (HEAD request)
+- `listTowns()` - list all towns with summary data
 
 ## License
 
