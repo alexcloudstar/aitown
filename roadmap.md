@@ -18,6 +18,19 @@
 - Pixel smoke puffs rising from tower rooftops
 - Subtle particle animation, dissipates as it rises
 
+### Town Controls (Action Menu)
+- Floating action button (FAB) or toolbar overlay on the canvas
+- On click/tap, expands into a radial or list menu with actions:
+  - **Center Town** — reset camera to the center of the town
+  - **Zoom In / Zoom Out** — explicit buttons (in addition to scroll wheel)
+  - **Fit to Screen** — auto-zoom to show the entire town
+  - **Toggle Cinematic Mode** — switch between interactive and auto-pan
+  - **Fullscreen** — enter/exit browser fullscreen
+  - **Toggle Grid** — show/hide tile grid overlay (debug/fun)
+  - **Toggle Peeps** — show/hide animated peeps
+- Keyboard shortcuts for power users (C = center, +/- = zoom, F = fullscreen)
+- Responsive: works as bottom bar on mobile, floating menu on desktop
+
 ### Sound Design
 - Ambient lo-fi background soundtrack
 - Footstep sounds for peeps
