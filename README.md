@@ -10,7 +10,7 @@
 </p>
 
 <p align="center">
-  <a href="https://aitown.so">aitown.so</a>
+  <a href="https://aitown-seven.vercel.app">aitown-seven.vercel.app</a>
 </p>
 
 ---
@@ -21,7 +21,7 @@ AI Town takes your exported Claude conversations and turns them into a retro pix
 
 **How it works:**
 1. Export your Claude data as a ZIP
-2. Upload it on [aitown.so](https://aitown.so)
+2. Upload it on [aitown-seven.vercel.app](https://aitown-seven.vercel.app)
 3. Claim a username, and your town goes live
 
 ## Features
@@ -32,7 +32,7 @@ AI Town takes your exported Claude conversations and turns them into a retro pix
 - Flickering windows, wandering peeps, street lamps with glow
 - Cinematic auto-pan mode
 - Click any building to see conversation stats
-- Shareable town URLs (`aitown.so/yourname`)
+- Shareable town URLs (`aitown-seven.vercel.app/yourname`)
 
 ## Tech Stack
 
